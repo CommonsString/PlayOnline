@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" metadata-complete="true" version="3.1">
+  <display-name>LearningStudyUWM</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+<!-- Servlet -->
+  <servlet>
+  	<servlet-name>adminController</servlet-name>
+  	<servlet-class>com.admin.controller.adminController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>adminController</servlet-name>
+  	<url-pattern>/admin</url-pattern>
+  </servlet-mapping>
+  
+   <servlet>
+  	<servlet-name>clientController</servlet-name>
+  	<servlet-class>com.client.controller.clientController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>clientController</servlet-name>
+  	<url-pattern>/client</url-pattern>
+  </servlet-mapping> 
+  
+  <servlet>
+  	<servlet-name>serverController</servlet-name>
+  	<servlet-class>com.server.controller.serverController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>serverController</servlet-name>
+  	<url-pattern>/server</url-pattern>
+  </servlet-mapping>
+  
+  
+  <!-- user -->
+  <servlet>
+  	<servlet-name>userController</servlet-name>
+  	<servlet-class>com.user.controller.userController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>userController</servlet-name>
+  	<url-pattern>/user</url-pattern>
+  </servlet-mapping>  
+  
+  
+  
+ <!-- 上传部分 --> 
+	 <servlet>
+		<servlet-name>alertFgPic</servlet-name>
+		<servlet-class>com.server.controller.alertFgPic</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>alertFgPic</servlet-name>
+		<url-pattern>/alertImg</url-pattern>
+	</servlet-mapping>	
+  
+	<servlet>
+		<servlet-name>augFile</servlet-name>
+		<servlet-class>com.server.controller.augFile</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>augFile</servlet-name>
+		<url-pattern>/uploadFile</url-pattern>
+	</servlet-mapping>	
+  
+  
+  
+</web-app>

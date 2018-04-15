@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmlbean.fileGroupMapper">
+
+<!-- client -->
+	<!-- 获取视频组信息（包含作者） -->
+	<select id="findByListAttribute" parameterType="java.util.HashMap" resultType="FileGroup">
+		<!-- 限制查找 -->
+		select * from fileGroup where blockId = #{blockId} order by updateDate desc
+		<if test="beginIndex != null and endIndex != null">
+			limit #{beginIndex} , #{endIndex}
+		</if>
+	</select>
+	
+	<!-- 获取记录数 -->
+	<select id="getTotal" parameterType="String" resultType="Integer">
+		select COUNT(*) from fileGroup where blockId = #{blockId}
+	</select>
+	
+	<!-- app主界面返回所有视频组 -->
+	<select id="getAllFileGroup" parameterType="java.util.HashMap" resultType="FileGroup">
+		select * from fileGroup order by updateDate desc
+		<if test="beginIndex != null and endIndex != null">
+			limit #{beginIndex} , #{endIndex}
+		</if>		
+	</select>	
+	
+	<!-- 获取记录数 -->
+	<select id="getTotalForMain" resultType="Integer">
+		select COUNT(*) from fileGroup
+	</select>
+		
+		
+	<!-- 根据ID查找视频组 -->
+	<select id="getFileGroupById" parameterType="String" resultType="FileGroup">
+		select * from fileGroup where fileGroupId = #{fileGroupId}
+	</select>
+	
+	
+<!-- server -->	
+
+	<!-- 增加视频组  -->
+	<insert id="addFileGroup">
+		<!-- 主键生成策略 -->
+		<selectKey keyProperty="fileGroupId" resultType="String" order="BEFORE">
+			select replace(uuid(), '-', '') from dual
+		</selectKey>
+		insert into fileGroup 
+		value(#{fileGroupId}, #{fileGroupStatus}, #{title}, #{discribe}, #{imgSrc}, 
+		#{blockId}, #{adminId}, #{flag}, #{recomNum}, #{updateDate})
+	</insert>	
+	
+	<!-- 修改视频组 -->
+	<update id="alertFileGroup" parameterType="FileGroup">
+		update filegroup set title = #{title} , discribe = #{discribe} 
+		, flag = #{flag} where fileGroupId = #{fileGroupId}
+	</update>	
+	
+	<!-- 根据blockId查找视频组 -->
+	<select id="getFileGroupByBlockId" parameterType="String" resultType="FileGroup">
+		select * from fileGroup where blockId = #{blockId}
+	</select>
+	
+	<!-- 根据视频组Id，删除视频组 参数1 -->
+	<delete id="deleteFileGroupById" parameterType="FileGroup">
+		delete from fileGroup where fileGroupId = #{fileGroupId}
+	</delete>
+	
+	<!-- 更改视频组图片 -->
+	<update id="alertFileGroupPic" parameterType="java.util.HashMap">
+		update fileGroup set imgSrc = #{imgSrc} where fileGroupId = #{fileGroupId}
+	</update>
+
+	<!-- 根据视频组Id，删除视频组 参数 2-->
+	<delete id="deleteFileGroupByIdString" parameterType="String">
+		delete from fileGroup where fileGroupId = #{fileGroupId}
+	</delete>
+			
+</mapper>

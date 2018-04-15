@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>
+	<class name="com.xmlBean.FileGroup" table="filegroup">
+		<id name="fileGroupId" column="fileGroupId">
+			<generator class="uuid"></generator>
+		</id> 
+		<property name="fileGroupStatus" column="fileGroupStatus"></property>	
+		<property name="title" column="title"></property>	
+		<property name="discribe" column="discribe"></property>	
+		<property name="imgSrc" column="imgSrc"></property>	
+		<property name="blockId" column="blockId"></property>	
+		<property name="flag" column="flag"></property>		
+		<property name="recomNum" column="recomNum"></property>	
+		<property name="adminId" column="adminId"></property>	
+		<property name="updateDate" column="updateDate"></property>	
+	</class>
+</hibernate-mapping>
+  

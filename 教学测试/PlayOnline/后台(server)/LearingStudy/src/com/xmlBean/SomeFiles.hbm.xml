@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" > 
+    <!-- "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" -->
+<hibernate-mapping>
+	<class name="com.xmlBean.SomeFiles" table="file">
+		<id name="fileId" column="fileId">
+			<generator class="uuid"></generator>
+		</id> 
+		<property name="fileGroupId" column="fileGroupId"></property>		
+		<property name="title" column="title"></property>	
+		<property name="fileSrc" column="fileSrc"></property>
+		<property name="uploadTime" column="uploadTime"></property>
+	</class>
+</hibernate-mapping>
+  

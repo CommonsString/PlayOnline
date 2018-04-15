@@ -1,0 +1,136 @@
+<template>
+  <div>
+    <div class="title" @click="switchForm">
+      <div :class="{'active': showLogin==true}">登录</div>
+      <div :class="{'active': showLogin==false}">注册</div>
+    </div>
+    <!-- {{isLogin}} -->
+    <div class="form">
+      <div class="block-input" v-if="!showLogin">
+        <span>昵称</span><input v-model="form.name" placeholder="请输入姓名或常用昵称">
+      </div>
+      <div class="block-input">
+        <span>账号</span><input type="email" v-model="form.email" placeholder="请输入邮箱地址">
+      </div>
+      <div class="block-input">
+        <span>密码</span><input type="password" v-model="form.password" placeholder="请输入密码">
+      </div>
+      <div class="block-input" v-if="!showLogin">
+        <span>确认</span><input type="password" v-model="form.passwordre" placeholder="请输入确认密码">
+      </div>
+    </div>
+    <div class="submit" @click="loginEnroll">提交</div>
+  </div>
+</template>
+
+<script>
+import IP from '@/assets/js/ip'
+export default {
+  name: '',
+  data: function () {
+    return {
+      showLogin: true,
+      form: {
+        name: '',
+        email: 'commons',
+        password: '123456',
+        passwordre: '123456'
+      }
+    }
+  },
+  computed: {
+    isLogin() {
+      return this.$store.getters.isLogin
+    }
+  },
+  methods: {
+    switchForm() {
+      this.showLogin=!this.showLogin
+    },
+    loginEnroll() {
+      let method = this.showLogin==true?'loginUser':'enroll'
+      if(method=='enroll'&&this.form.password!=this.form.passwordre){
+        alert('两次密码不一致')
+        return
+      }
+      this.$http.post(
+        IP+'/user',
+        {
+          method: method,
+          name: this.form.name,
+          email: this.form.email,
+          password: this.form.password
+        },
+        {emulateJSON: true}
+      )
+      .then(res=>{
+        if(res.data.status==true){
+        	console.log('res.data.user',res.data.user)
+          this.$store.commit('login',res.data.user)
+          if(this.showLogin){
+            this.$router.back()
+          }
+          else{
+            alert('激活邮件已发送到邮箱\n请登陆并激活账号')
+          }
+        }
+        else{
+          alert(res.data.info)
+        }
+      })
+      .catch(err=>{
+//      this.$store.commit('login',{
+//        name: '张三'
+//      })
+//      this.$router.back()
+      })
+    }
+  }
+}
+</script>
+
+<style scoped>
+.title{
+  text-align: center;
+  margin-top: 60px;
+}
+.title div{
+  display: inline-block;
+  padding: 3px;
+  margin: 30px 0px;
+}
+.active{
+  font-size: 30px;
+  border-bottom: 1px solid gray;
+}
+.form{
+  /* border: 1px solid black; */
+  width: 330px;
+  margin: 0px auto;
+}
+.block-input{
+  /* height: 30px; */
+  margin: 10px 0px;
+}
+.block-input span{
+  font-size: 18px;
+  padding: 10px;
+}
+.block-input input{
+  padding: 3px 10px;
+  height: auto;
+  border: 0px;
+  border-bottom: 1px solid gray;
+  background: transparent;
+  font-size: 17px;
+  outline: none;
+}
+.submit{
+  margin: 23px auto;
+  border-radius: 5px;
+  width: 70px; height: 35px;
+  text-align: center; line-height: 35px;
+  background: rgb(50, 50, 50);
+  color: rgb(240,240,240);
+}
+</style>

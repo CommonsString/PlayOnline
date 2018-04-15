@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- development 开发模式
+	work : 工作模式
+ -->
+ 	<properties resource="dbo.properties"></properties>
+ 	
+ 	<!-- 配置实体类的别名 -->
+ 	<typeAliases>
+ 		<package name="com.xmlbean"/>
+ 	</typeAliases>
+ 	
+	<environments default="development"> <!-- 模式 -->
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver" value="${driver}" />
+		 	 	<property name="url" value="${url}"></property>
+		 	 	<!-- &amp 在配置文件中，无法转义 -->
+				<!-- <property name="url" value="jdbc:mysql://39.108.147.44:3306/safezyw?useUnicode=true&amp;characterEncoding=utf8"></property> -->
+				<property name="username" value="${username}" />
+				<property name="password" value="${password}" />
+				<property name="poolMaximumActiveConnections" value="${poolMaximumActiveConnections}"/>  
+				<property name="poolMaximumCheckoutTime" value="${poolMaximumCheckoutTime}"/>  
+				<property name="poolMaximumIdleConnections" value="${poolMaximumIdleConnections}"/> 
+			</dataSource>
+		</environment>
+	</environments>
+	<!-- 映射 -->
+	<mappers>
+		<mapper resource="com/xmlbean/adminMapper.xml" />
+		<mapper resource="com/xmlbean/blockMapper.xml" />
+		<mapper resource="com/xmlbean/fileGroupMapper.xml" />
+		<mapper resource="com/xmlbean/someFilesMapper.xml" />
+		<mapper resource="com/xmlbean/UsersMapper.xml" />
+		<mapper resource="com/xmlbean/recommendMapper.xml" />
+		<mapper resource="com/xmlbean/commentMapper.xml" />
+		<mapper resource="com/xmlbean/rectifyInfoMapper.xml" />
+	</mappers>
+</configuration>

@@ -1,0 +1,2 @@
+<Context docBase="磁盘路径" path="/工程名/upload/images" reloadable="true" />
+<Context docBase="E:\Guava\tomcatServer\apache-tomcat-8.0.32\upload\videos" path="/LearingStudy/upload/videos" reloadable="true" />

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmlbean.rectifyInfoMapper">
+
+	<insert id="addRectifyInfo" parameterType="RectifyInfo">
+		<!-- 主键生成策略 -->
+		<selectKey keyProperty="rectifyInfoId" resultType="String" order="BEFORE">
+			select replace(uuid(),'-','') from dual
+		</selectKey>
+		insert into rectifyInfo value (#{rectifyInfoId}, #{email}, #{question1}, #{answer1}, #{question2}, #{answer2})
+	</insert>
+	
+	<select id="getRectifyByEmail" parameterType="String" resultType="RectifyInfo">
+		select question1, question2, answer1, answer2 from rectifyInfo where email = #{email}
+	</select>
+</mapper>

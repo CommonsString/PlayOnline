@@ -1,0 +1,89 @@
+<template>
+  <div class="">
+    <div class="block-top"/>
+    <vHeader ref="header" @onSwitchBlock='switchBlock' class='v-header'/>
+    <div class="v-content">
+      <keep-alive>
+        <router-view ref='view'>
+        </router-view>
+      </keep-alive>
+    </div>
+  </div>
+</template>
+<script>
+import vHeader from '@/components/Header.vue'
+export default {
+  name: "",
+  mounted() {
+    let that = this
+    document.addEventListener("plusready", function() {
+      plus.key.addEventListener("backbutton",function(){
+        try {
+          if(that.$route.path=='/Layout/Index'){
+            if(confirm('是否退出程序？')){
+              plus.runtime.quit()
+            }
+          }
+          else{
+            document.getElementsByClassName('img-back')[0].click()
+          }
+          if(that.$route.path=='/Layout/Index'||that.$route.path=='/Layout/Block'){
+            that.$store.commit()
+          }
+        } catch (e) {
+          alert(e.toString())
+        }
+      })
+    })
+  },
+  updated() {
+    console.log('aa' ,this.$refs.view.page)
+    if(this.$route.path=='/'){
+      this.$store.commit('changeBlock','')
+    }
+  },
+  components: {
+    vHeader
+  },
+  methods: {
+//事件处理部分----------------------------------------
+    //当界面为主页时清除头部导航模块被选中的效果
+    switchBlock() {
+      this.$router.push('/Layout/Block')
+      this.$refs.view.page = 1
+      let that = this
+      setTimeout(function(){
+        that.$refs.view.getFileGroups(true)
+      },10)
+    }
+  }
+}
+</script>
+<style lang="css">
+::-webkit-scrollbar{
+  height: 0.1px;
+  width: 0px;
+}
+body{
+  margin: 0px; height: 0px;
+  background: rgb(245, 245, 245);
+}
+.block-top{
+  width: 100%;
+  height: 20px;
+  background: #c0020a;
+}
+.v-header{
+  position: absolute;
+  height: 78px;
+  width: 100%;
+}
+.v-content{
+  position: absolute;
+  width: 100%;
+  top: 105px;
+  bottom: 0px;
+  overflow: auto;
+  margin: 0px;
+}
+</style>

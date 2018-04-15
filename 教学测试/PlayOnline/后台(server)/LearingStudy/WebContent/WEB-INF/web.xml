@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" metadata-complete="true" version="3.1">
+  <display-name>TestMyId</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+<servlet>
+	<servlet-name>adminController</servlet-name>
+	<servlet-class>com.admin.controller.adminController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>adminController</servlet-name>
+	<url-pattern>/admin</url-pattern>
+</servlet-mapping>
+
+<!-- 客户端反射 -->
+<servlet>
+	<servlet-name>customerController</servlet-name>
+	<servlet-class>com.customer.controller.customerController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>customerController</servlet-name>
+	<url-pattern>/client</url-pattern>
+</servlet-mapping>
+
+<!-- 服务器端反射 -->
+<servlet>
+	<servlet-name>serverController</servlet-name>
+	<servlet-class>com.server.controller.serverController</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>serverController</servlet-name>
+	<url-pattern>/server</url-pattern>
+</servlet-mapping>
+
+<!-- 上传文件  -->
+<servlet>
+	<servlet-name>augFile</servlet-name>
+	<servlet-class>com.server.controller.augFile</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>augFile</servlet-name>
+	<url-pattern>/uploadFile</url-pattern>
+</servlet-mapping>
+
+<!-- 上传视频组(测试)  -->
+<servlet>
+	<servlet-name>augFileGroup</servlet-name>
+	<servlet-class>com.server.controller.augFileGroup</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>augFileGroup</servlet-name>
+	<url-pattern>/uploadFileGroup</url-pattern>
+</servlet-mapping>
+
+<!-- 更换视频组封面(测试)  -->
+<servlet>
+	<servlet-name>alertFgPic</servlet-name>
+	<servlet-class>com.server.controller.alertFgPic</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>alertFgPic</servlet-name>
+	<url-pattern>/alertImg</url-pattern>
+</servlet-mapping>
+
+ <listener>
+	<listener-class>tools.servlet.ServletIndexListener</listener-class>
+</listener> 
+
+  
+</web-app>

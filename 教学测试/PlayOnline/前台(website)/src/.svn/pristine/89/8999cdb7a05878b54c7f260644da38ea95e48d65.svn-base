@@ -1,0 +1,17 @@
+export default{
+  // contactList: store => {
+  //   return store.contact.map(function(item){
+  //     item.headUrl = {
+  //       'background': 'url('+item.head+')'
+  //     }
+  //     return item
+  //   })
+  // }
+  isLogin: store => {
+    console.log(store.user.name)
+    return store.user.name != undefined
+  },
+  user: store => {
+    return store.user
+  }
+}

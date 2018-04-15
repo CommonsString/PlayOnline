@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmlbean.adminMapper">
+	<!-- 管理员登录  -->
+	<select id="loginAdmin" parameterType="java.util.HashMap" resultType="Admin">
+		select * from admin where account = #{account} and password = #{password}
+	</select>	
+	
+	<!-- 获取作者信息 -->
+	<select id="getAdmin" parameterType="String" resultType="Admin">
+		select adminId , name from admin where adminId = #{admin}
+	</select>
+</mapper>

@@ -1,0 +1,10 @@
+export default{
+  activeBlockId: '',//当前板块id
+  page: '',//页数
+  currentFileGroup: {},//当前视频组
+  //用户信息
+  user: {
+    // userId: 'dsfsd',
+    // name: '和哈'
+  }
+}

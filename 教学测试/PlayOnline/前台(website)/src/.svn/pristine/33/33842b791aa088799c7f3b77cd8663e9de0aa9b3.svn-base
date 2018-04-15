@@ -1,0 +1,157 @@
+<template>
+  <div id="">
+    <Card v-for="item in fileGroups" :key="item.fileGroupId"
+    @click.native="cardClickSet(item)"
+    :item="item.fileGroup" class="block-card"/>
+    <div v-if="!onReq" class="block-more" @click="getFileGroups">
+      {{ getMore }}
+    </div>
+    <div v-else class="block-more" @click="reqingAlert">
+      {{ dataGetting }}
+    </div>
+  </div>
+</template>
+<script>
+import IP from '@/assets/js/ip'
+import Card from '@/components/Card'
+export default {
+  name: "",
+  mounted() {
+    //do something after mounting vue instance
+    this.$emit('blockmounted')
+    console.log('ahahaha')
+  },
+  methods: {
+    //////////////////////事件处理部分//////////////////////
+    cardClickSet(item){
+      // this.$emit('onclickcard',item)
+      this.$router.push('/Player')
+      this.$store.commit('changeFileGroup', item)
+    },
+    reqingAlert(){
+      alert('数据获取中，请稍候..')
+    },
+    //////////////////////请求部分//////////////////////
+    getFileGroups(tf) {
+      	if(tf==true|this.page==1){
+          this.page = 1
+        }
+      console.log(this.blockId,this.page)
+      this.onReq = true
+    	//tf控制当前数据列表是否需要清空
+      this.$http.post(
+        IP+'/client',
+        {
+          method : 'getFileGroups',
+          blockId: this.blockId,
+          page: this.page
+        },
+        {emulateJSON: true}
+      )
+      .then(res=>{
+        this.onReq = false
+        //当转换板块或当页数为1时，在获取数据前一刻清空视频组列表
+        console.log('get',tf)
+      	if(tf==true|this.page==1){
+      		// this.page = 1
+      		this.fileGroups = []
+      	}
+        if(res.data.blockId==this.blockId){
+          console.log(res.data.blockId==this.blockId)
+          if(res.data.fileGroups==""){
+            this.getMore = '到底了'
+            alert('无更多数据')
+            return
+          }
+          this.page++
+          this.fileGroups = this.fileGroups
+          .concat(res.data.fileGroups)
+          console.log(res.data.fileGroups)
+        }
+      })
+      .catch(err=>{
+        this.onReq = false
+        this.fileGroups =  [
+         {
+            fileGroup: {
+              fileGroupId: '00',
+              fileGrounpStatus: '已完结',
+              title: '视频标题',
+              discribe: '视频详细描述',
+              imgSrc: 'http://img.bizhi.sogou.com/images/2012/01/28/147706.jpg',
+              flag: '1000',
+              recomNum: '20'
+            },
+            author: {
+              amdinId: 'adminid',
+              name: 'author name'
+            }
+          },
+          {
+            fileGroup: {
+              fileGroupId: '00',
+              fileGrounpStatus: '已完结',
+              title: '视频标题',
+              discribe: '视频详细描述',
+              imgSrc: 'http://img.bizhi.sogou.com/images/2012/01/28/147706.jpg',
+              flag: '1000',
+              recomNum: '20'
+            },
+            author: {
+              amdinId: 'adminid',
+              name: 'author name'
+            }
+          },
+          {
+            fileGroup: {
+              fileGroupId: '00',
+              fileGrounpStatus: '已完结',
+              title: '视频标题',
+              discribe: '视频详细描述',
+              imgSrc: 'http://img.bizhi.sogou.com/images/2012/01/28/147706.jpg',
+              flag: '1000',
+              recomNum: '20'
+            },
+            author: {
+              amdinId: 'adminid',
+              name: 'author name'
+            }
+          }
+       ]
+      })
+    }
+  },
+  data (){
+    return{
+      fileGroups: [],
+      page: 1,
+      onReq: false,
+      getMore: '点击获取更多',
+      dataGetting: '数据获取中..'
+    }
+  },
+  computed: {
+    blockId() {
+      return this.$store.state.activeBlockId
+    },
+  },
+  components: {
+    Card
+  }
+}
+</script>
+<style lang="css" scoped>
+.block-card{
+  margin: 5px;
+}
+.block-more{
+  margin: 5px 5px;
+  padding: 3px 0px;
+  text-align: center;
+  /*color: #BF0A10;*/
+  color:rgb(112, 112, 112);
+  font-size: 15px;
+  /*border-bottom: 1px solid #BF0A10;*/
+  border-bottom: 1px solid rgb(157, 155, 155);
+}
+</style>

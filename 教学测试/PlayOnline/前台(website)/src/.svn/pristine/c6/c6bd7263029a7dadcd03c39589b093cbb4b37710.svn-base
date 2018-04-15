@@ -1,0 +1,22 @@
+<template>
+  <keep-alive exclude="sider">
+    <router-view id="app"/>
+  </keep-alive>
+</template>
+
+<script>
+export default {
+  name: '',
+  created (){
+    this.$router.replace('/Layout')
+  },
+  data: function () {
+    return {
+      
+    }
+  }
+}
+</script>
+
+<style scoped>
+</style>

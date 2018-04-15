@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+	"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+	"http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+		<session-factory>
+		<!-- 数据库配置 -->
+			<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+			<property name="hibernate.connection.url">jdbc:mysql://39.108.147.44:3306/safezyw?useUnicode=true&amp;characterEncoding=utf8</property>
+			<property name="hibernate.connection.username">root</property>
+			<property name="hibernate.connection.password">mysql</property>
+			
+		<!-- hibernate  -->
+<!-- 			<property name="hibernate.show_sql">true</property> 对SQL格式化
+			<property name="hibernate.format_sql">true</property> 格式化输出SQL -->
+			<property name="hibernate.hbm2ddl.auto">update</property> <!-- 自动  -->
+			<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property> <!-- 本地语言 -->
+			<property name="hibernate.connection.characterEncoding">utf-8</property>    <!-- 设置编码方式为utf-8 -->  
+			<property name="hibernate.connection.release_ mode">on_close</property> <!-- 连接关闭策略，session关闭，释放连接 -->
+<!-- 是否根据需要自动建表 --> 
+		<!-- 连接池 -->
+			<property name="hibernate.c3p0.min_size">5</property>
+			<property name="hibernate.c3p0.max_size">40</property>	
+			<property name="hibernate.c3p0.max_statements">50</property> <!-- 缓存Statement的数量 -->
+			<property name="hibernate.c3p0.timeout">3000</property> <!-- 连接超时时长 -->
+			<property name="c3p0.idle_test_period">2000</property>
+		<!-- session绑定  测试使用，多线程环境弃用-->
+<!-- 			<property name="hibernate.current_session_context_class">thread</property> -->
+		<!-- 加载映射  -->
+			<!-- <mapping resource="com/domain/Person.hbm.xml"/> -->
+			<mapping resource="com/xmlBean/SomeFiles.hbm.xml"/> 
+			<mapping resource="com/xmlBean/Block.hbm.xml"/>
+			<mapping resource="com/xmlBean/FileGroup.hbm.xml"/>
+			<mapping resource="com/xmlBean/Admin.hbm.xml"/>
+		</session-factory>
+</hibernate-configuration>

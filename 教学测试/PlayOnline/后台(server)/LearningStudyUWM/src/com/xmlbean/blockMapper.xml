@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmlbean.blockMapper">
+	<!-- 获取板块列表 -->
+	<select id="getAllBlock" resultType="Block">
+		select * from block;
+	</select>
+	
+	<!-- 新增板块 -->
+	<insert id="addBlock" parameterType="Block">
+		<!-- 主键生成策略 -->
+		<selectKey keyProperty="blockId" resultType="String" order="BEFORE">
+			select replace(uuid(),'-','') from dual
+		</selectKey>
+		insert into block value (#{blockId}, #{subject})	
+	</insert>
+	
+	<!-- 修板块名 -->
+	<update id="alertBlock" parameterType="java.util.HashMap">
+		update block set subject = #{subject} where blockId = #{blockId}	
+	</update>	
+	
+	<!-- 根据Id查找板块 -->
+	<select id="getBlockById" parameterType="String" resultType="Block">
+		select * from block where blockId = #{blockId}
+	</select>
+	
+	<!-- 根据Id,删除板块 -->
+	<delete id="deleteBlockById" parameterType="Block">
+		delete from block where blockId = #{blockId}
+	</delete>
+	
+	
+</mapper>

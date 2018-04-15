@@ -1,0 +1,12 @@
+export default{
+  changeBlock(state, blockId){
+    state.activeBlockId = blockId
+  },
+  changeFileGroup(state, fg) {
+  	console.log('fg',fg)
+    state.currentFileGroup = fg
+  },
+  login(state, user) {
+    state.user = user
+  }
+}

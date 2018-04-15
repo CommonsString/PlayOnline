@@ -1,0 +1,36 @@
+import Vue from 'vue'
+import Router from 'vue-router'
+import Index from '@/pages/Index'
+import Menu from '@/pages/Menu'
+import Block from '@/pages/Block'
+import Player from '@/pages/Player'
+import Login from '@/pages/Login'
+
+Vue.use(Router)
+export default new Router({
+  mode: 'history',
+  routes: [
+    {
+      path: '/',
+      component: Index
+    },
+    // {
+    //   path: '/Menu',
+    //   component: Menu
+    // },
+    {
+      path: '/Block',
+      component: Block
+    },
+    {
+      path: '/Player',
+      name: 'player',
+      component: Player
+    },
+    {
+      path: '/Login',
+      name: 'login',
+      component: Login
+    }
+  ]
+})

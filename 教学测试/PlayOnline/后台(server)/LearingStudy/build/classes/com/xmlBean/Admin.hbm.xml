@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC  
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"  
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd"> 
+<hibernate-mapping>
+	<class name="com.xmlBean.Admin" table="admin">
+		<id name="adminId" column="adminId">
+			<generator class="uuid"></generator>
+		</id> 
+		<property name="account" column="account"></property>		
+		<property name="password" column="password"></property>	
+		<property name="name" column="name"></property>	
+		<property name="level" column="level"></property>	
+	</class>
+</hibernate-mapping>
+  

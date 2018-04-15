@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmlbean.someFilesMapper">
+
+	<!-- 根据视频组Id 查询子视频列表 -->
+	<select id="getListBySomeFiles" parameterType="String" resultType="SomeFiles">
+		select * from file where fileGroupId = #{fileGroupId} 
+		order by uploadTime asc
+	</select>
+	
+	<!-- 根据视频组ID ， 查找子视频 -->
+	<select id="getSomeFilesByFileGroupId" parameterType="String" resultType="SomeFiles">
+		select * from file where fileGroupId = #{fileGroupId}
+	</select>
+	
+	<!-- 根据Id删除子视频 -->
+	<delete id="deleteSomeFiles" parameterType="SomeFiles">
+		delete from file where fileId = #{fileId}
+	</delete>
+	
+	<!-- 增加子文件 -->
+	<insert id="addSomeFiles" parameterType="SomeFiles">
+		<!-- 主键生成策略 -->
+		<selectKey keyProperty="fileId" resultType="String" order="BEFORE">
+			select replace(uuid(), '-', '') from dual
+		</selectKey>	
+		insert into file 
+		value(#{fileId}, #{fileGroupId}, #{title}, #{fileSrc}, #{uploadTime})
+	</insert>
+	
+	<!-- 根据Id删除子视频 -->
+	<delete id="deleteSomeFilesByIdString" parameterType="String">
+		delete from file where fileId = #{fileId}
+	</delete>
+	
+	<!-- 根据ID查询子视频 -->
+	<select id="getSomeFilesById" parameterType="String" resultType="SomeFiles">
+		select * from file where fileId = #{fileId}
+	</select>	
+	
+	
+	
+</mapper>

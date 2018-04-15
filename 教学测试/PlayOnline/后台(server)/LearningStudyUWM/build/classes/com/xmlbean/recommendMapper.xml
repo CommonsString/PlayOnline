@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xmlbean.recommendMapper.xml">
+
+	<!-- recommend -->
+	<select id="isRecommend" parameterType="java.util.HashMap" resultType="Recommend">
+		select * from recommend where userId = #{userId} and fileGroupId = #{fileGroupId}
+	</select>
+	
+	<!-- addRecommend -->
+	<insert id="addRecommend" parameterType="java.util.HashMap">
+		insert into recommend value (#{fileGroupId}, #{userId})
+	</insert>	
+	
+	<!-- deleteRecommend -->
+	<delete id="deleteRecommend" parameterType="java.util.HashMap">
+		delete from recommend where fileGroupId = #{fileGroupId} and userId = #{userId}
+	</delete>	
+		
+</mapper>
